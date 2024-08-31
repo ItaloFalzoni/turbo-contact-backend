@@ -30,6 +30,8 @@ const ContactScrema = new mongoose.Schema({
     ref: "User",
     required: [true, "UserId is required"],
   },
+}, {
+  timestamps: true,
 })
 
 export default mongoose.model("Contact", ContactScrema)
