@@ -10,5 +10,9 @@ export const generateToken = user => {
 }
 
 export const decodeToken = token => {
-  return jsonwebtoken.verify(token, process.env.JWT_SECRET)
+  try {
+    return jsonwebtoken.verify(token, process.env.JWT_SECRET)
+  } catch (error) {
+    return { user_id: null }
+  }
 }

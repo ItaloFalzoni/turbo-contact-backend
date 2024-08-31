@@ -7,13 +7,10 @@ export const validateToken = (req, res, next) => {
     return res.status(401).json({ error: "Token is required" })
   }
 
-  const {
-    exp,
-    user_id,
-  } = decodeToken(token)
+  const { user_id } = decodeToken(token)
 
-  if (exp < Date.now().valueOf() / 1000) {
-    return res.status(401).json({ error: "Token is expired" })
+  if (!user_id) {
+    return res.status(401).json({ error: "Token is invalid or expired" })
   }
 
   req.user_id = user_id
