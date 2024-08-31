@@ -1,17 +1,14 @@
 import contactModel from "../models/contact.model.js"
-import { getUserIdFromHeaders } from "../utils/getUserIdFromHeader.js"
 
 export const validateContactsByUserId = async (req, res, next) => {
   try {
-    const userId = getUserIdFromHeaders(req)
-
     const contact = await contactModel.findById(req.params.id)
 
     if (!contact) {
       return res.status(404).json({ error: "Contact not found" })
     }
 
-    if (contact.userId.toString() !== userId) {
+    if (contact.userId.toString() !== req.user_id) {
       return res.status(403).json({ error: "Unauthorized to update this contact" })
     }
 

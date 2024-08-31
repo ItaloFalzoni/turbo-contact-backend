@@ -1,11 +1,8 @@
 import contactModel from "../models/contact.model.js"
-import { getUserIdFromHeaders } from "../utils/getUserIdFromHeader.js"
 
 export const getContacts = async (req, res) => {
   try {
-    const userId = getUserIdFromHeaders(req)
-
-    const contact = await contactModel.find({ userId })
+    const contact = await contactModel.find({ userId: req.user_id })
     res.json(contact)
   } catch (error) {
     res.status(500).json({ error: error.message })
@@ -22,9 +19,7 @@ export const getContactById = async (req, res) => {
 
 export const createContact = async (req, res) => {
   try {
-    const userId = getUserIdFromHeaders(req)
-
-    const contact = await contactModel.create({ userId, ...req.body })
+    const contact = await contactModel.create({ userId: req.user_id, ...req.body })
     res.json(contact)
   } catch (error) {
     res.status(500).json({ error: error.message })

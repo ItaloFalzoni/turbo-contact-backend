@@ -1,5 +1,5 @@
 import userModel from "../models/user.model.js"
-import { generateToken } from "../utils/generateToken.js"
+import { generateToken } from "../utils/token.js"
 
 export const login = async (req, res) => {
   try {

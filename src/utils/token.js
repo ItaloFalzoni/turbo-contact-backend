@@ -8,3 +8,7 @@ export const generateToken = user => {
     expiresIn: "1h"
   })
 }
+
+export const decodeToken = token => {
+  return jsonwebtoken.verify(token, process.env.JWT_SECRET)
+}
