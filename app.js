@@ -2,6 +2,7 @@ import express from "express"
 
 import contactRoute from "./src/routes/contact.route.js"
 import userRoute from "./src/routes/user.route.js"
+import authRoute from "./src/routes/auth.route.js"
 
 const app = express()
 
@@ -11,6 +12,7 @@ app.use(express.json())
 // Rotas
 app.use("/api/contacts", contactRoute)
 app.use("/api/users", userRoute)
+app.use("/login", authRoute)
 
 // Rota principal
 app.get("/", async (req, res) => {
